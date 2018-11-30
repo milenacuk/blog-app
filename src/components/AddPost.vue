@@ -9,9 +9,9 @@
     <div class="form-group">
         <label>Text </label>
         <textarea class ="form-control" v-model="newPost.text" placeholder="Enter text"></textarea>
-    </div>
-    
-    <button type="submit" >Submit</button>
+    </div>    
+    <button Width="89px" type="submit" >Submit</button>
+    <button Width="89px" @click.stop.prevent="resetForm">Reset</button>
     </form>
     </div>
 </template>
@@ -32,7 +32,18 @@ export default {
                     this.newPost ={};
                     this.$router.push('/posts');
                 })
+        },
+        resetForm(){
+            this.newPost = {}
         }
     }
 }
 </script>
+
+<style>
+.container button {
+     width:150px;
+    height:auto;
+    display:inline-block;
+}
+</style>
