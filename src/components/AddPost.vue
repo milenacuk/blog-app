@@ -1,7 +1,7 @@
 <template>
     <div>
         <br>
-        <form @submit.prevent="addPost">
+        <form @submit.prevent="submit">
             <div class="form-group row" >
                 <label>Title </label>
                     <input type='text' v-model="newPost.title" placeholder="Enter title" required minlength='2'><br>
@@ -20,12 +20,33 @@
 import { posts } from '../services/Posts.js'
 
 export default {
+    created() {
+        if(this.$route.params.id){
+            posts.get(this.$route.params.id)
+            .then(response => {
+                //console.log(response);
+                this.post = response.data;
+                this.newPost = response.data;
+            })
+            .catch(error => {
+                console.log(error.response.data);
+            })
+        }
+    },
     data(){
         return{
             newPost: {}
         }
     },
     methods: {
+        submit(){
+            if(this.$route.params.id){
+                this.editPost();
+            }
+            else{
+                this.addPost();
+            }
+        },
         addPost(){
             posts.add(this.newPost)                    
                 .then(() => {
@@ -35,7 +56,11 @@ export default {
         },
         resetForm(){
             this.newPost = {}
-        }
+        },
+        editPost(){
+                posts.edit(this.$route.params.id, this.newPost)
+                .then(() => this.$router.push('/posts'));
+            }
     }
 }
 </script>
