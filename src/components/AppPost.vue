@@ -11,6 +11,9 @@
                     Edit post
                     </router-link>
                 </button>
+                <button class="btn btn-outline-primary" @click="deletePost(post.id)">
+                    Delete post
+                </button>
             </span>
         </h2>
             <!-- <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p> -->
@@ -41,6 +44,11 @@ export default {
         goToSinglePost(id){
             this.$router.push(`/posts/${id}`)
 
+            },
+        deletePost(id){
+            posts.delete(id).then(() => {                   
+                    this.$router.push('/posts');
+                })
             }
             
         }
