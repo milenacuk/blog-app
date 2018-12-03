@@ -5,10 +5,10 @@ export default class Posts{
         axios.defaults.baseURL = 'http://localhost:3000/api/'
     }
     getAll(){
-        return axios.get('posts');
+        return axios.get('posts?filter={"include":["comments"]}');
     }
     get(id){
-        return axios.get(`posts/${id}`);
+        return axios.get(`posts/${id}?filter={"include":["comments"]}`);
     }
     add(newPost){
         return axios.post('posts', newPost);
@@ -18,6 +18,9 @@ export default class Posts{
     }
     delete(id){
         return axios.delete(`posts/${id}`);
+    }
+    addComment(comment, postId){
+        return axios.post(`posts/${id}/comments/`, comment);
     }
 }
 export const posts = new Posts();

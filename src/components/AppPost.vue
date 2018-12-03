@@ -46,8 +46,8 @@ export default {
 
             },
         deletePost(id){
-            posts.delete(id).then(() => {                   
-                    this.$router.push('/posts');
+            posts.delete(id).then((success) => {
+                this.posts = this.posts.filter(c => c.id !== id)
                 })
             }
             
