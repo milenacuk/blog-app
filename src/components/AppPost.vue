@@ -1,9 +1,24 @@
 <template>
 <div class="container">
-    <br>
-    <div v-for="(post,index) in posts" :key="index">
-        <h2> {{post.title }}
-            <span>
+    <div class="jumbotron">
+
+    <table border="1">
+         
+        <thead>
+            <th>Title</th>
+            <th>Text</th>
+        </thead>
+       
+        <tbody>                   
+            <tr v-for="(post,index) in posts" :key="index">
+                
+
+                <td>
+                    <h2> {{post.title }} </h2>
+                </td>
+                <td>
+                    <h2> {{post.text }} </h2>
+                </td>
                 <button class="btn btn-outline-primary" @click="goToSinglePost(post.id)">
                     View post
                 </button>
@@ -14,10 +29,15 @@
                 <button class="btn btn-outline-primary" @click="deletePost(post.id)">
                     Delete post
                 </button>
-            </span>
-        </h2>
+                
+            </tr>
+        </tbody>
+       
+            
             <!-- <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p> -->
             <!-- <p>{{ post.text }}</p> -->
+    
+    </table>
     </div>
 </div>
 </template>
@@ -60,5 +80,16 @@ export default {
 .container div h2 {
     padding-right: 20px;
 }
+table {
+    border: 5px;
+    /* sklonila sam border oko tabele */
+}
+.btn {
+    margin-top: 2px;
+}
+.jumbotron {
+    width: 100%;
+}
+
 </style>
 

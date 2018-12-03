@@ -19,8 +19,8 @@ export default class Posts{
     delete(id){
         return axios.delete(`posts/${id}`);
     }
-    addComment(comment, postId){
-        return axios.post(`posts/${id}/comments/`, comment);
+    addComment( postId, comment){
+        return axios.post(`posts/${postId}/comments/`, comment);
     }
 }
 export const posts = new Posts();

@@ -25,16 +25,26 @@ import { posts } from '../services/Posts.js'
 import AddComment from './AddComment.vue'
 
 export default {
+    created(){
+    posts.get(this.$route.params.id).then(response => {
+            this.post = response.data;
+            // console.log(this.post);
+        }).catch(error => {
+            console.log(error.response);
+        })   
+    } , 
 data(){
     return{
-        post: {
+        post: []
             // title: '',
             // text: ''
-        },
+        ,
         comments: []
     }
 } ,
 methods: {
+    
+    
     addComment(newComment){
         posts.addComment(this.post.id, newComment)
         .then(response => {
@@ -48,13 +58,6 @@ methods: {
 },
 components: {
     AddComment
-},
-created(){
-    posts.get(this.$route.params.id).then(response => {
-            this.post = response.data;
-        }).catch(error => {
-            console.log(error.response);
-        })   
-    }   
+} 
 }
 </script>
