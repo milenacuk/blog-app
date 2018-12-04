@@ -18,8 +18,10 @@
 
 <script>
 import { posts } from '../services/Posts.js'
+import {mixin} from '../mixins/mixins'
 
 export default {
+    mixins: [mixin],
     created() {
         if(this.$route.params.id){
             posts.get(this.$route.params.id)
@@ -51,7 +53,8 @@ export default {
             posts.add(this.newPost)                    
                 .then(() => {
                     this.newPost ={};
-                    this.$router.push('/posts');
+                    // this.$router.push('/posts');
+                    this.redirectTo('posts')
                 })
         },
         resetForm(){
@@ -59,7 +62,8 @@ export default {
         },
         editPost(){
                 posts.edit(this.$route.params.id, this.newPost)
-                .then(() => this.$router.push('/posts'));
+                // .then(() => this.$router.push('/posts'));
+                .then(() => this.redirectTo('posts'));
             }
     }
 }

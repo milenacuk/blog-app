@@ -14,10 +14,14 @@
                 
 
                 <td>
-                    <h2> {{post.title }} </h2>
+                    <h3> {{post.title }} </h3>
                 </td>
                 <td>
-                    <h2> {{post.text }} </h2>
+                    <h4> {{post.text }} </h4>
+                </td>
+               
+                <td>
+                    <h5>Comments number: {{ post.comments.length }} </h5>
                 </td>
                 <button class="btn btn-outline-primary" @click="goToSinglePost(post.id)">
                     View post
@@ -45,9 +49,10 @@
 
 <script>
 import { posts } from '../services/Posts.js'
+import {mixin, DataMixin} from '../mixins/mixins'
 
 export default {
-    
+    mixins: [mixin,DataMixin],
     data(){
         return{
             posts:[]
